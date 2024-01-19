@@ -23,7 +23,10 @@ default: &default
 
 development:
   <<: *default
-  database: jobmap_development
+  host: <%= ENV["JOBMAP_DATABASE_HOST"] %>
+  database: <%= ENV["JOBMAP_DATABASE_NAME"] %>
+  username: <%= ENV["JOBMAP_DATABASE_USERNAME"] %>
+  password: <%= ENV["JOBMAP_DATABASE_PASSWORD"] %>
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -81,6 +84,9 @@ test:
 #
 production:
   <<: *default
-  database: jobmap_production
-  username: jobmap
-  password: <%= ENV["JOBMAP_DATABASE_PASSWORD"] %>
+  url: <%= ENV["DATABASE_URL"] %>
+  host: <%= ENV["PGHOST"] %>
+  database: <%= ENV["PGDATABASE"] %>
+  username: <%= ENV["PGUSER"] %>
+  password: <%= ENV["PGPASSWORD"] %>
+  port: <%= ENV["PGPORT"] %>
